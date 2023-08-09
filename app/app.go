@@ -7,8 +7,10 @@ import (
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/xuender/kit/cache"
 	"github.com/xuender/kit/oss"
+	"github.com/xuender/kit/types"
 	"gonum.org/v1/plot/vg/draw"
 	"gonum.org/v1/plot/vg/vgimg"
 )
@@ -41,7 +43,6 @@ func NewApp(
 }
 
 func (p *App) Draw(screen *ebiten.Image) {
-	// ebitenutil.DebugPrint(screen, "test")
 	eimg, has := p.cache.GetNoExtension(_key)
 	if !has {
 		procs := p.process.Procs
@@ -58,6 +59,7 @@ func (p *App) Draw(screen *ebiten.Image) {
 	}
 
 	screen.DrawImage(eimg, &ebiten.DrawImageOptions{})
+	ebitenutil.DebugPrint(screen, types.Itoa(ebiten.ActualFPS()))
 }
 
 func (p *App) Update() error {

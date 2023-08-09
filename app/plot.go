@@ -45,6 +45,7 @@ func (p *Plot) CPU(canvas draw.Canvas, procs map[string][]time.Duration) {
 	}
 
 	sort.Strings(titles)
+	lo.Reverse(titles)
 
 	for _, title := range titles {
 		xys := make([]plotter.XY, p.size)
